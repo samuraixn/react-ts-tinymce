@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import Hello from './Hello';
+import TinyEditor from './TinyEditor';
 import './style.css';
 
 interface AppProps { }
@@ -23,6 +24,7 @@ class App extends Component<AppProps, AppState> {
         <p>
           Start editing to see some magic happen :)
         </p>
+        <TinyEditor />
       </div>
     );
   }
