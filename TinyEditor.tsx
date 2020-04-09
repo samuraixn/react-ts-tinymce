@@ -76,8 +76,7 @@ class TinyEditor extends React.Component {
               e.preventDefault();
             } else {
               // Code for highlight new text
-              const rng = editor.dom.createRng();
-
+              
             }
           });
           }
