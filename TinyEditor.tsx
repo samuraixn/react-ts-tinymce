@@ -48,6 +48,8 @@ class TinyEditor extends React.Component {
             //   //console.log('Change: ', c);
             //   // var content = editor.getContent();;
             //   // editor.setContent(content);
+            // let content = editor.seleciton.getContent();
+            // editor.selection.setContent('<span class="hightligh">' + content + '</span>');  
             // });
 
             // editor.on('NodeChange', function(nc) {
