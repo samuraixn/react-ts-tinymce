@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
@@ -37,6 +36,50 @@ class TinyEditor extends React.Component {
             editor.on('TextColorChange', function(e) {
               console.log('The text color of ' + e.name + ' is now:' + e.color);
             });
+
+            // editor.on('PreProcess', function(obj) {
+            //   //console.log('PRE - Obj: ', obj);
+            // });
+
+            // editor.on('PostProcess', function(obj) {
+            //   //console.log('POST - Obj: ', obj);
+            // });
+            // editor.on('Change', function(c) {
+            //   //console.log('Change: ', c);
+            //   // var content = editor.getContent();;
+            //   // editor.setContent(content);
+            // });
+
+            // editor.on('NodeChange', function(nc) {
+            //   //console.log('NC::: ', nc);
+            // });
+
+            editor.on('BeforeSetContent', function(bsc) {
+              console.log('BSC: ', bsc);
+            });          
+
+          editor.on('keydown', function (e) {
+            const isBackspace = e.code === "Backspace";
+            const isTextSelected = editor.selection.getContent() !== "";
+            
+            if (isBackspace && isTextSelected) {
+              editor.selection.setNode(editor.dom.create('del', {}, editor.selection.getContent()));
+              e.preventDefault();
+            } else if (isBackspace && !isTextSelected) {
+              const rng = editor.dom.createRng();
+              const currentSel = editor.selection.getRng();
+              rng.setStart(currentSel.startContainer, currentSel.startOffset - 1);
+              rng.setEnd(currentSel.endContainer, currentSel.endOffset);
+              editor.selection.setRng(rng);
+              editor.selection.setNode(editor.dom.create('del', {}, editor.selection.getContent()));
+              editor.selection.setCursorLocation(currentSel.startContainer, currentSel.startOffset);
+              e.preventDefault();
+            } else {
+              // Code for highlight new text
+              const rng = editor.dom.createRng();
+
+            }
+          });
           }
         }}
         onChange={this.handleEditorChange}
